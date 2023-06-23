@@ -1,8 +1,16 @@
 import { Component } from '@angular/core';
+import { ModalService } from 'src/application/modal/modal.service';
 
 @Component({
 	selector: 'ws-modal',
 	templateUrl: './modal.component.html',
 	styleUrls: ['./modal.component.css']
+	// providers: [ModalService]
 })
-export class ModalComponent {};
+export class ModalComponent {
+	constructor(public modal: ModalService) {};
+
+	closeModal() {
+		this.modal.toggleModal();
+	};
+};
