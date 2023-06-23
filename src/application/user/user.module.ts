@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AuthenticationModalComponent } from './authentication-modal/authentication-modal.component';
 
 @NgModule({
-	declarations: [],
+	declarations: [AuthenticationModalComponent],
 	imports: [CommonModule]
 })
 export class UserModule {};
