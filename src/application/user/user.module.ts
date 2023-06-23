@@ -4,6 +4,7 @@ import { AuthenticationModalComponent } from './authentication-modal/authenticat
 
 @NgModule({
 	declarations: [AuthenticationModalComponent],
-	imports: [CommonModule]
+	imports: [CommonModule],
+	exports: [AuthenticationModalComponent]
 })
 export class UserModule {};
