@@ -1,29 +1,29 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import { ApplicationComponent } from './application.component';
 
-describe('AppComponent', () => {
+describe('ApplicationComponent', () => {
 	beforeEach(() => TestBed.configureTestingModule({
 		imports: [RouterTestingModule],
-		declarations: [AppComponent]
+		declarations: [ApplicationComponent]
 	}));
 
 	it('should create the app', () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.componentInstance;
+		const fixture = TestBed.createComponent(ApplicationComponent);
+		const application = fixture.componentInstance;
 
-		expect(app).toBeTruthy();
+		expect(application).toBeTruthy();
 	});
 
 	it('should have as title \'wholesome-sights\'', () => {
-		const fixture = TestBed.createComponent(AppComponent);
-		const app = fixture.componentInstance;
+		const fixture = TestBed.createComponent(ApplicationComponent);
+		const application = fixture.componentInstance;
 		
-		expect(app.title).toEqual('wholesome-sights');
+		expect(application.title).toEqual('wholesome-sights');
 	});
 
 	it('should render title', () => {
-		const fixture = TestBed.createComponent(AppComponent);
+		const fixture = TestBed.createComponent(ApplicationComponent);
 
 		fixture.detectChanges();
 
