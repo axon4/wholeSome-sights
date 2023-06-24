@@ -12,6 +12,6 @@ export class HeaderComponent {
 	openModal($event: MouseEvent) {
 		$event.preventDefault();
 
-		this.modal.toggleModal();
+		this.modal.toggleModal('authentication');
 	};
 };

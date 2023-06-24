@@ -1,16 +1,31 @@
 import { Injectable } from '@angular/core';
 
+type Modal = {
+	ID: string;
+	open: boolean;
+};
+
 @Injectable({providedIn: 'root'})
 export class ModalService {
 	constructor() {};
 
-	private open = false;
+	private modals: Modal[] = [];
 
-	get isModalOpen() {
-		return this.open;
+	register(ID: string) {
+		this.modals.push({ ID, open: false });		
 	};
 
-	toggleModal() {
-		this.open = !(this.open);
+	isModalOpen(ID: string) {
+		const isOpen = Boolean(this.modals.find(modal => modal.ID === ID)?.open);
+
+		return isOpen;
+	};
+
+	toggleModal(ID: string) {
+		const modal = this.modals.find(modal => modal.ID === ID);
+
+		if (modal) {
+			modal.open = !(modal.open);
+		};
 	};
 };
