@@ -28,4 +28,8 @@ export class ModalService {
 			modal.open = !(modal.open);
 		};
 	};
+
+	deRegister(ID: string) {
+		this.modals = this.modals.filter(modal => modal.ID !== ID);
+	};
 };
