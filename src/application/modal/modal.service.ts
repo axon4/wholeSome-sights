@@ -7,8 +7,6 @@ type Modal = {
 
 @Injectable({providedIn: 'root'})
 export class ModalService {
-	constructor() {};
-
 	private modals: Modal[] = [];
 
 	register(ID: string) {
