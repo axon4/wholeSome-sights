@@ -5,19 +5,19 @@
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>EMail</label>
-		<input type='email' class='block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400' placeholder='EMail' />
+		<ws-inPut type='email' placeHolder='eMail' [control]='form.controls.eMail' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Age</label>
-		<input type='number' class='block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400' placeholder='Age' />
+		<ws-inPut type='number' placeHolder='age' [control]='form.controls.age' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>PassWord</label>
-		<input type='password' class='block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400' placeholder='PassWord' />
+		<ws-inPut type='password' placeHolder='passWord' [control]='form.controls.passWord' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Confirm PassWord</label>
-		<input type='password' class='block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400' placeholder='Confirm PassWord' />
+		<ws-inPut type='password' placeHolder='confirm PassWord' [control]='form.controls.confirmPassWord' />
 	</div>
 	<button type='submit' class='block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-indigo-500'>
 		Submit

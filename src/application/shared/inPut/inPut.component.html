@@ -1,5 +1,10 @@
 <input [type]='type' class='block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400' [placeholder]='placeHolder | titlecase' [formControl]='control' />
 <ng-container *ngIf='control.touched && control.dirty'>
 	<span class='text-red-400' *ngIf='control.errors?.required'>'{{ placeHolder }}' is required</span>
-	<span class='text-red-400' *ngIf='control.errors?.minlength'>'{{ placeHolder }}' is too short ({{ control.errors?.minlength.actualLength }}/{{ control.errors?.minlength.requiredLength }})</span>
+	<span class='text-red-400' *ngIf='control.errors?.minlength'>'{{ placeHolder }}' is too short</span>
+	<span class='text-red-400' *ngIf='control.errors?.maxlength'>'{{ placeHolder }}' is too long</span>
+	<span class='text-red-400' *ngIf='control.errors?.email'>'{{ placeHolder }}' is an invalid eMail</span>
+	<span class='text-red-400' *ngIf='control.errors?.min'>'{{ placeHolder }}' is too low</span>
+	<span class='text-red-400' *ngIf='control.errors?.max'>'{{ placeHolder }}' is too high</span>
+	<span class='text-red-400' *ngIf='control.errors?.pattern'>'{{ placeHolder }}' is inValid</span>
 </ng-container>
