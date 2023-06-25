@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationFormComponent {
 	form = new FormGroup({
-		name: new FormControl('', Validators.required),
+		name: new FormControl('', [Validators.required, Validators.minLength(3)]),
 		eMail: new FormControl(''),
 		age: new FormControl(''),
 		passWord: new FormControl(''),

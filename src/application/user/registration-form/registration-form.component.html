@@ -1,9 +1,7 @@
 <form [formGroup]='form'>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Name</label>
-		<input type='text' class='block w-full py-1.5 px-3 text-gray-200 border border-gray-400 transition duration-500 focus:outline-none rounded bg-transparent focus:border-indigo-400' placeholder='Name' formControlName='name' minlength='3' />
-		<span class='text-red-400' *ngIf='form.controls.name.touched && form.controls.name.dirty && form.controls.name.errors?.required'>'name' is required</span>
-		<span class='text-red-400' *ngIf='form.controls.name.touched && form.controls.name.dirty && form.controls.name.errors?.minlength'>'name' is too short ({{ form.controls.name.errors?.minlength.actualLength }}/{{ form.controls.name.errors?.minlength.requiredLength }})</span>
+		<ws-inPut type='text' placeHolder='Name' [control]='form.controls.name' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>EMail</label>

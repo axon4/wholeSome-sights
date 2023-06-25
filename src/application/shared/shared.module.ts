@@ -5,10 +5,11 @@ import { ModalComponent } from './modal/modal.component';
 import { TabsComponent } from './tab/tabs/tabs.component';
 import { TabComponent } from './tab/tab/tab.component';
 import { InPutComponent } from './inPut/inPut.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [ModalComponent, TabsComponent, TabComponent, InPutComponent],
-	imports: [CommonModule],
+	imports: [CommonModule, ReactiveFormsModule],
 	exports: [ModalComponent, TabsComponent, TabComponent, InPutComponent]
 	// providers: [ModalService]
 })
