@@ -1,3 +1,6 @@
+<ws-banner [colour]='bannerColour' *ngIf='showBanner'>
+	{{ bannerMessage }}
+</ws-banner>
 <form [formGroup]='form' (ngSubmit)='submit()'>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Name</label>

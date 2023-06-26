@@ -14,8 +14,13 @@ export class RegistrationFormComponent {
 		passWord: new FormControl('', [Validators.required, /* Validators.pattern(/(.*){7,96}/) */ Validators.minLength(7), Validators.maxLength(96)]),
 		confirmPassWord: new FormControl('', [Validators.required])
 	});
+	showBanner = false;
+	bannerMessage = 'Registration in Progress';
+	bannerColour = 'blue';
 
 	submit() {
-		console.log('submit');
+		this.showBanner = true;
+		this.bannerMessage = 'Registration in Progress';
+		this.bannerColour = 'blue';
 	};
 };
