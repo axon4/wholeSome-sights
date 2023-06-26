@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class LogInFormComponent {
 	credentials = {eMail: '', passWord: ''};
+
+	submit() {
+		console.log(this.credentials);
+	};
 };
