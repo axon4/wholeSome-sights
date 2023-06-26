@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
 	templateUrl: './log-in-form.component.html',
 	styleUrls: ['./log-in-form.component.css']
 })
-export class LogInFormComponent {};
+export class LogInFormComponent {
+	credentials = {eMail: '', passWord: ''};
+};
