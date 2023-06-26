@@ -11,7 +11,11 @@ export class RegistrationFormComponent {
 		name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(72)]),
 		eMail: new FormControl('', [Validators.required, Validators.email]),
 		age: new FormControl('', [Validators.required, Validators.min(9), Validators.max(70)]),
-		passWord: new FormControl('', [Validators.required, Validators.pattern(/(.*){7,96}/)]),
+		passWord: new FormControl('', [Validators.required, /* Validators.pattern(/(.*){7,96}/) */ Validators.minLength(7), Validators.maxLength(96)]),
 		confirmPassWord: new FormControl('', [Validators.required])
 	});
+
+	submit() {
+		console.log('submit');
+	};
 };
