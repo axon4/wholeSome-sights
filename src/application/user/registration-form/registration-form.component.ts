@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 	styleUrls: ['./registration-form.component.css']
 })
 export class RegistrationFormComponent {
-	constructor(private authentication: AngularFireAuth) {};
+	constructor(private authentication: AngularFireAuth, private fireStore: AngularFirestore) {};
 
 	form = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(72)]),
@@ -32,6 +33,7 @@ export class RegistrationFormComponent {
 			const { name, age, eMail, passWord } = this.form.value;
 
 			await this.authentication.createUserWithEmailAndPassword(eMail as string, passWord as string);
+			await this.fireStore.collection('users').add({ name, age, eMail });
 
 			this.bannerMessage = 'Registration Successful';
 			this.bannerColour = 'green';
