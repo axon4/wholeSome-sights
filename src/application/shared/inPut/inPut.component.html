@@ -13,5 +13,6 @@
 	<span class='text-red-400' *ngIf='control.errors?.email'>'{{ placeHolder }}' is an inValid eMail</span>
 	<span class='text-red-400' *ngIf='control.errors?.min'>'{{ placeHolder }}' is too low</span>
 	<span class='text-red-400' *ngIf='control.errors?.max'>'{{ placeHolder }}' is too high</span>
+	<span class='text-red-400' *ngIf='control.errors?.misMatch'>'{{ placeHolder.replace(' ', '') }}' misMatch</span>
 	<span class='text-red-400' *ngIf='control.errors?.pattern'>'{{ placeHolder }}' is inValid</span>
 </ng-container>
