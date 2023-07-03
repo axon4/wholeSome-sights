@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/application/authentication/authentication.service';
 import { RegistrationValidators } from '../validators/registration-validators';
+import { RegistrationValidators as RegistrationValidator } from '../validators/registration-validators';
 import User from '../../models/user.model';
 
 @Component({
@@ -10,15 +11,15 @@ import User from '../../models/user.model';
 	styleUrls: ['./registration-form.component.css']
 })
 export class RegistrationFormComponent {
-	constructor(private authentication: AuthenticationService) {};
+	constructor(private authentication: AuthenticationService, private registrationValidators: RegistrationValidators) {};
 
 	form = new FormGroup({
 		name: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(72)]),
-		eMail: new FormControl('', [Validators.required, Validators.email]),
+		eMail: new FormControl('', [Validators.required, Validators.email], this.registrationValidators.validate),
 		age: new FormControl<number | null>(null, [Validators.required, Validators.min(9), Validators.max(70)]),
 		passWord: new FormControl('', [Validators.required, /* Validators.pattern(/(.*){7,96}/) */ Validators.minLength(7), Validators.maxLength(96)]),
 		confirmPassWord: new FormControl('', [Validators.required])
-	}, [RegistrationValidators.match('passWord', 'confirmPassWord')]);
+	}, [RegistrationValidator.match('passWord', 'confirmPassWord')]);
 	
 	pending = false;
 	showBanner = false;

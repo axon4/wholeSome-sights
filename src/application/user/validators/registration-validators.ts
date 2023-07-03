@@ -1,6 +1,11 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { Injectable } from '@angular/core';
+import { AbstractControl, AsyncValidator, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AuthenticationService } from 'src/application/authentication/authentication.service';
 
-export class RegistrationValidators {
+@Injectable({providedIn: 'root'})
+export class RegistrationValidators implements AsyncValidator {
+	constructor(private authentication: AuthenticationService) {};
+
 	static match(control1Name: string, control2Name: string): ValidatorFn {
 		return function(formGroup: AbstractControl): ValidationErrors | null {
 			const control1 = formGroup.get(control1Name);
@@ -11,5 +16,9 @@ export class RegistrationValidators {
 	
 			return error;
 		};
+	};
+
+	validate = (control: AbstractControl): Promise<ValidationErrors | null> => {
+		return this.authentication.isEMailTaken(control.value).catch(error => {console.error(error); return null});
 	};
 };

@@ -11,6 +11,7 @@
 	<span class='text-red-400' *ngIf='control.errors?.minlength'>'{{ placeHolder }}' is too short</span>
 	<span class='text-red-400' *ngIf='control.errors?.maxlength'>'{{ placeHolder }}' is too long</span>
 	<span class='text-red-400' *ngIf='control.errors?.email'>'{{ placeHolder }}' is an inValid eMail</span>
+	<span class='text-red-400' *ngIf='control.errors?.eMailTaken'>'{{ placeHolder }}' is taken</span>
 	<span class='text-red-400' *ngIf='control.errors?.min'>'{{ placeHolder }}' is too low</span>
 	<span class='text-red-400' *ngIf='control.errors?.max'>'{{ placeHolder }}' is too high</span>
 	<span class='text-red-400' *ngIf='control.errors?.misMatch'>'{{ placeHolder.replace(' ', '') }}' misMatch</span>
