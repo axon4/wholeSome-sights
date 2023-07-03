@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from './authentication/authentication.service';
 
 @Component({
 	selector: 'ws-root',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
 	styleUrls: ['./application.component.css']
 })
 export class ApplicationComponent {
-	title = 'wholesome-sights';
+	constructor(public authentication: AuthenticationService) {};
 };
