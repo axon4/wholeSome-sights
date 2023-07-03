@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthenticationService } from 'src/application/authentication/authentication.service';
 
 @Component({
 	selector: 'ws-log-in-form',
@@ -6,9 +7,30 @@ import { Component } from '@angular/core';
 	styleUrls: ['./log-in-form.component.css']
 })
 export class LogInFormComponent {
+	constructor(private authentication: AuthenticationService) {};
+
 	credentials = {eMail: '', passWord: ''};
 
-	submit() {
-		console.log(this.credentials);
+	pending = false;
+	showBanner = false;
+	bannerMessage = 'Log In in Progress';
+	bannerColour = 'blue';
+
+	async submit() {
+		this.pending = true;
+		this.showBanner = true;
+		this.bannerMessage = 'Log In in Progress';
+		this.bannerColour = 'blue';
+
+		try {
+			await this.authentication.logIn(this.credentials);
+
+			this.bannerMessage = 'Log In Successful';
+			this.bannerColour = 'green';
+		} catch (error) {
+			this.pending = false;
+			this.bannerMessage = 'Error Logging In';
+			this.bannerColour = 'red';
+		};
 	};
 };

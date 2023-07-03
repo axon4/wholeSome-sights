@@ -19,4 +19,8 @@ export class AuthenticationService {
 		await this.usersCollection.doc(credentials.user?.uid).set({ name, age, eMail });
 		await credentials.user?.updateProfile({displayName: name});
 	};
+
+	async logIn({ eMail, passWord }: {eMail: string; passWord: string}) {
+		await this.authentication.signInWithEmailAndPassword(eMail, passWord);
+	};
 };

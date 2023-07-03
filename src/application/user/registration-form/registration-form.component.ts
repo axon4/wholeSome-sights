@@ -18,6 +18,7 @@ export class RegistrationFormComponent {
 		passWord: new FormControl('', [Validators.required, /* Validators.pattern(/(.*){7,96}/) */ Validators.minLength(7), Validators.maxLength(96)]),
 		confirmPassWord: new FormControl('', [Validators.required])
 	});
+	
 	pending = false;
 	showBanner = false;
 	bannerMessage = 'Registration in Progress';

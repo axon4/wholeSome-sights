@@ -1,3 +1,6 @@
+<ws-banner [colour]='bannerColour' *ngIf='showBanner'>
+	{{ bannerMessage }}
+</ws-banner>
 <form #form='ngForm' (ngSubmit)='submit()'>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>EMail</label>
@@ -32,7 +35,7 @@
 	<button
 		type='submit'
 		class='block w-full bg-indigo-400 text-white py-1.5 px-3 rounded transition hover:bg-indigo-500 disabled:opacity-50 disabled:bg-indigo-400'
-		[disabled]='form.invalid'
+		[disabled]='form.invalid || pending'
 	>
 		Submit
 	</button>
