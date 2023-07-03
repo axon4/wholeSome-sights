@@ -25,4 +25,8 @@ export class AuthenticationService {
 	async logIn({ eMail, passWord }: {eMail: string; passWord: string}) {
 		await this.authentication.signInWithEmailAndPassword(eMail, passWord);
 	};
+
+	async logOut() {
+		await this.authentication.signOut();
+	};
 };

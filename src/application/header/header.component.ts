@@ -15,4 +15,14 @@ export class HeaderComponent {
 
 		this.modal.toggleModal('authentication');
 	};
+
+	async logOut($event: MouseEvent) {
+		$event.preventDefault();
+
+		try {
+			this.authentication.logOut();
+		} catch (error) {
+			console.error(error);
+		};
+	};
 };

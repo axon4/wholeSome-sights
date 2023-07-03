@@ -13,6 +13,9 @@
 					<li>
 						<a href='about.html' class='px-2'>About</a>
 					</li>
+					<li>
+						<a href='#' class='px-2' (click)='logOut($event)'>Log Out</a>
+					</li>
 				</ng-template>
 				<li *ngIf='!(authentication.loggedIn$ | async); else navigation'>
 					<a href='#' class='px-2' (click)='openModal($event)'>Log In / Register</a>
