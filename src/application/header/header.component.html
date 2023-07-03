@@ -3,16 +3,18 @@
 		<a href='index.html' class='text-3xl text-indigo-400 font-bold uppercase mr-4'>WholeSome Sights</a>
 		<div class='flex flex-grow items-center'>
 			<ul class='flex flex-row mt-1'>
-				<li>
-					<a href='#' class='px-2'>Manage</a>
-				</li>
-				<li>
-					<a href='#' class='px-2'>Upload</a>
-				</li>
-				<li>
-					<a href='about.html' class='px-2'>About</a>
-				</li>
-				<li>
+				<ng-template #navigation>
+					<li>
+						<a href='#' class='px-2'>Manage</a>
+					</li>
+					<li>
+						<a href='#' class='px-2'>Upload</a>
+					</li>
+					<li>
+						<a href='about.html' class='px-2'>About</a>
+					</li>
+				</ng-template>
+				<li *ngIf='!(authentication.loggedIn$ | async); else navigation'>
 					<a href='#' class='px-2' (click)='openModal($event)'>Log In / Register</a>
 				</li>
 			</ul>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
+import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
 	selector: 'ws-header',
@@ -7,7 +8,7 @@ import { ModalService } from '../modal/modal.service';
 	styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-	constructor(public modal: ModalService) {};
+	constructor(public modal: ModalService, public authentication: AuthenticationService) {};
 
 	openModal($event: MouseEvent) {
 		$event.preventDefault();
