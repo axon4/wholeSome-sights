@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from 'src/application/authentication/authentication.service';
-import { RegistrationValidator } from '../validators/registration-validator';
+import { RegistrationValidators } from '../validators/registration-validators';
 import User from '../../models/user.model';
 
 @Component({
@@ -18,7 +18,7 @@ export class RegistrationFormComponent {
 		age: new FormControl<number | null>(null, [Validators.required, Validators.min(9), Validators.max(70)]),
 		passWord: new FormControl('', [Validators.required, /* Validators.pattern(/(.*){7,96}/) */ Validators.minLength(7), Validators.maxLength(96)]),
 		confirmPassWord: new FormControl('', [Validators.required])
-	}, [RegistrationValidator.match('passWord', 'confirmPassWord')]);
+	}, [RegistrationValidators.match('passWord', 'confirmPassWord')]);
 	
 	pending = false;
 	showBanner = false;

@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export class RegistrationValidator {
+export class RegistrationValidators {
 	static match(control1Name: string, control2Name: string): ValidatorFn {
 		return function(formGroup: AbstractControl): ValidationErrors | null {
 			const control1 = formGroup.get(control1Name);
