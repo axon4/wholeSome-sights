@@ -8,8 +8,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class SightComponent {
 	constructor(private route: ActivatedRoute) {
-		this.ID = this.route.snapshot.params.ID;
+		this.route.params.subscribe(parameter => {this.ID = parameter.ID});
 	};
 
-	ID: string;
+	ID = '';
 };
