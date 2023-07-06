@@ -10,6 +10,10 @@ const routes: Routes = [
 		data: {authenticationRequired: true}
 	},
 	{
+		path: 'management',
+		redirectTo: 'manage'
+	},
+	{
 		path: 'upLoad',
 		component: UpLoadComponent,
 		data: {authenticationRequired: true}
