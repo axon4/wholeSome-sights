@@ -25,12 +25,12 @@ const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 	],
 	imports: [
 		BrowserModule,
-		ApplicationRoutingModule,
 		UserModule,
 		FireBaseModule,
 		AngularFireAuthModule,
 		AngularFirestoreModule,
-		VideoModule
+		VideoModule,
+		ApplicationRoutingModule
 	],
 	providers: [],
 	bootstrap: [ApplicationComponent]
