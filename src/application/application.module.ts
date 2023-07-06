@@ -10,6 +10,7 @@ import { VideoModule } from './video/video.module';
 import { ApplicationComponent } from './application.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { SightComponent } from './sight/sight.component';
 
 const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 
@@ -17,7 +18,8 @@ const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 	declarations: [
 		ApplicationComponent,
 		HeaderComponent,
-  		HomeComponent
+		HomeComponent,
+		SightComponent
 	],
 	imports: [
 		BrowserModule,
