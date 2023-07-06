@@ -11,6 +11,7 @@ import { ApplicationComponent } from './application.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { SightComponent } from './sight/sight.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 
@@ -19,7 +20,8 @@ const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 		ApplicationComponent,
 		HeaderComponent,
 		HomeComponent,
-		SightComponent
+		SightComponent,
+		NotFoundComponent
 	],
 	imports: [
 		BrowserModule,
