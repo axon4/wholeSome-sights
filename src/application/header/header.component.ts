@@ -10,14 +10,14 @@ import { AuthenticationService } from '../authentication/authentication.service'
 export class HeaderComponent {
 	constructor(public modal: ModalService, public authentication: AuthenticationService) {};
 
-	openModal($event: MouseEvent) {
-		$event.preventDefault();
+	openModal(event: MouseEvent) {
+		event.preventDefault();
 
 		this.modal.toggleModal('authentication');
 	};
 
-	async logOut($event: MouseEvent) {
-		$event.preventDefault();
+	async logOut(event: MouseEvent) {
+		event.preventDefault();
 
 		try {
 			await this.authentication.logOut();
