@@ -5,7 +5,8 @@ import { ManageComponent } from './manage/manage.component';
 const routes: Routes = [
 	{
 		path: 'manage',
-		component: ManageComponent
+		component: ManageComponent,
+		data: {authenticationRequired: true}
 	}
 ];
 

@@ -1,13 +1,26 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { ValidationErrors } from '@angular/forms';
-import { Observable, delay, map } from 'rxjs';
+import { Observable, delay, filter, map, of, switchMap } from 'rxjs';
 import User from '../models/user.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-	constructor(private authentication: AngularFireAuth, private fireStore: AngularFirestore) {
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute,
+		private authentication: AngularFireAuth,
+		private fireStore: AngularFirestore
+	) {
+		this.router.events
+			.pipe(
+				filter(event => event instanceof NavigationEnd),
+				map(() => this.route.firstChild),
+				switchMap(route => route?.data ?? of({authenticationRequired: false}))
+			)
+			.subscribe(data => {this.reDirect = data.authenticationRequired});
 		this.usersCollection = fireStore.collection<User>('users');
 		this.loggedIn$ = authentication.user.pipe(map(Boolean));
 		this.loggedInDelayed$ = this.loggedIn$.pipe(delay(1000));
@@ -15,6 +28,7 @@ export class AuthenticationService {
 
 	private usersCollection: AngularFirestoreCollection<Omit<User, 'passWord'>>;
 	private fireStore2 = this.fireStore;
+	public reDirect = false;
 	public loggedIn$: Observable<boolean>;
 	public loggedInDelayed$: Observable<boolean>;
 
@@ -34,5 +48,9 @@ export class AuthenticationService {
 
 	async logOut() {
 		await this.authentication.signOut();
+
+		if (this.reDirect) {
+			this.router.navigateByUrl('/');
+		};
 	};
 };

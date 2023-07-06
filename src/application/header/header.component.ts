@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalService } from '../modal/modal.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 
@@ -9,11 +8,7 @@ import { AuthenticationService } from '../authentication/authentication.service'
 	styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-	constructor(
-		private router: Router,
-		public modal: ModalService,
-		public authentication: AuthenticationService
-	) {};
+	constructor(public modal: ModalService, public authentication: AuthenticationService) {};
 
 	openModal($event: MouseEvent) {
 		$event.preventDefault();
@@ -26,8 +21,6 @@ export class HeaderComponent {
 
 		try {
 			await this.authentication.logOut();
-
-			this.router.navigateByUrl('/')
 		} catch (error) {
 			console.error(error);
 		};
