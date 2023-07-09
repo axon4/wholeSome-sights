@@ -1,8 +1,6 @@
 import { Directive, HostListener } from '@angular/core';
 
-@Directive({
-	selector: '[ws-event-blocker]'
-})
+@Directive({selector: '[WS-event-blocker]'})
 export class EventBlockerDirective {
 	@HostListener('dragover', ['$event'])
 	@HostListener('drop', ['$event'])
