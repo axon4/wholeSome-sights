@@ -8,7 +8,7 @@ import { TabsComponent } from './tab/tabs/tabs.component';
 import { TabComponent } from './tab/tab/tab.component';
 import { InPutComponent } from './inPut/inPut.component';
 import { BannerComponent } from './banner/banner.component';
-import { EventBlockerDirective } from './event-blocker.directive';
+import { EventBlockerDirective } from './event-blocker/event-blocker.directive';
 
 @NgModule({
 	declarations: [
