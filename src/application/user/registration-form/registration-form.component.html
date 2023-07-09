@@ -1,26 +1,26 @@
-<ws-banner [colour]='bannerColour' *ngIf='showBanner'>
+<WS-banner [colour]='bannerColour' *ngIf='showBanner'>
 	{{ bannerMessage }}
-</ws-banner>
+</WS-banner>
 <form [formGroup]='form' (ngSubmit)='submit()'>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Name</label>
-		<ws-inPut type='text' placeHolder='name' [control]='form.controls.name' />
+		<WS-inPut type='text' placeHolder='name' [control]='form.controls.name' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>EMail</label>
-		<ws-inPut type='email' placeHolder='eMail' [control]='form.controls.eMail' />
+		<WS-inPut type='email' placeHolder='eMail' [control]='form.controls.eMail' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Age</label>
-		<ws-inPut type='number' placeHolder='age' [control]='form.controls.age' mask='' />
+		<WS-inPut type='number' placeHolder='age' [control]='form.controls.age' mask='' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>PassWord</label>
-		<ws-inPut type='password' placeHolder='passWord' [control]='form.controls.passWord' />
+		<WS-inPut type='password' placeHolder='passWord' [control]='form.controls.passWord' />
 	</div>
 	<div class='mb-3'>
 		<label class='inline-block mb-2'>Confirm PassWord</label>
-		<ws-inPut type='password' placeHolder='confirm PassWord' [control]='form.controls.confirmPassWord' />
+		<WS-inPut type='password' placeHolder='confirm PassWord' [control]='form.controls.confirmPassWord' />
 	</div>
 	<button
 		type='submit'

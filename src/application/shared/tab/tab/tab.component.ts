@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'ws-tab',
+	selector: 'WS-tab',
 	templateUrl: './tab.component.html',
 	styleUrls: ['./tab.component.css']
 })

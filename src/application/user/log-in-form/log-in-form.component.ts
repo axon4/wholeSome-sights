@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from 'src/application/authentication/authentication.service';
 
 @Component({
-	selector: 'ws-log-in-form',
+	selector: 'WS-log-in-form',
 	templateUrl: './log-in-form.component.html',
 	styleUrls: ['./log-in-form.component.css']
 })

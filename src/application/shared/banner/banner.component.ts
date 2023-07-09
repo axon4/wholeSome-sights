@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-	selector: 'ws-banner',
+	selector: 'WS-banner',
 	templateUrl: './banner.component.html',
 	styleUrls: ['./banner.component.css']
 })

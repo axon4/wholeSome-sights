@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-	selector: 'ws-manage',
+	selector: 'WS-manage',
 	templateUrl: './manage.component.html',
 	styleUrls: ['./manage.component.css']
 })

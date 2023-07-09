@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-	selector: 'ws-sight',
+	selector: 'WS-sight',
 	templateUrl: './sight.component.html',
 	styleUrls: ['./sight.component.css']
 })

@@ -6,7 +6,7 @@ import { RegistrationValidators as RegistrationValidator } from '../validators/r
 import User from '../../models/user.model';
 
 @Component({
-	selector: 'ws-registration-form',
+	selector: 'WS-registration-form',
 	templateUrl: './registration-form.component.html',
 	styleUrls: ['./registration-form.component.css']
 })

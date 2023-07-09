@@ -3,7 +3,7 @@ import { ModalService } from '../modal/modal.service';
 import { AuthenticationService } from '../authentication/authentication.service';
 
 @Component({
-	selector: 'ws-header',
+	selector: 'WS-header',
 	templateUrl: './header.component.html',
 	styleUrls: ['./header.component.css']
 })

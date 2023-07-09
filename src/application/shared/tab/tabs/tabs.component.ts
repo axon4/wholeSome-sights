@@ -2,7 +2,7 @@ import { AfterContentInit, Component, ContentChildren, QueryList } from '@angula
 import { TabComponent } from '../tab/tab.component';
 
 @Component({
-	selector: 'ws-tabs',
+	selector: 'WS-tabs',
 	templateUrl: './tabs.component.html',
 	styleUrls: ['./tabs.component.css']
 })

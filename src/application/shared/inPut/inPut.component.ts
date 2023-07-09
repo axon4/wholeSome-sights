@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-	selector: 'ws-inPut',
+	selector: 'WS-inPut',
 	templateUrl: './inPut.component.html',
 	styleUrls: ['./inPut.component.css']
 })
