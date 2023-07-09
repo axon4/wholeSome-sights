@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { v4 as UUID } from 'uuid';
 
 @Component({
 	selector: 'WS-upLoad',
@@ -7,6 +9,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 	styleUrls: ['./upLoad.component.css']
 })
 export class UpLoadComponent {
+	constructor(private storage: AngularFireStorage) {};
+
 	draggedOver = false;
 	file: File | null = null;
 	nextStep = false;
@@ -28,6 +32,8 @@ export class UpLoadComponent {
 	};
 
 	submit() {
-		console.log('SUBMIT');
+		const fileName = `${this.file!.name}-${UUID()}`;
+
+		this.storage.upload(`sights/${fileName}`, this.file);
 	};
 };
