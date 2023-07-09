@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class UpLoadComponent {
 	draggedOver = false;
 	file: File | null = null;
+	nextStep = false;
 
 	upLoad(event: DragEvent) {
 		this.draggedOver = false;
@@ -15,6 +16,6 @@ export class UpLoadComponent {
 
 		if (!(this.file) || this.file.type !== 'video/mp4') return;
 
-		console.log(this.file);
+		this.nextStep = true;
 	};
 };
