@@ -1,6 +1,12 @@
-import { Directive } from '@angular/core';
+import { Directive, HostListener } from '@angular/core';
 
 @Directive({
-	selector: '[eventBlocker]'
+	selector: '[ws-event-blocker]'
 })
-export class EventBlockerDirective {};
+export class EventBlockerDirective {
+	@HostListener('dragover', ['$event'])
+	@HostListener('drop', ['$event'])
+	handleDragDrop(event: DragEvent) {
+		event.preventDefault();
+	};
+};
