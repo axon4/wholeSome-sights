@@ -21,6 +21,11 @@ export class UpLoadComponent {
 	});
 	form = new FormGroup({title: this.title});
 
+	pending = false;
+	showBanner = false;
+	bannerMessage = 'UpLoad in Progress';
+	bannerColour = 'blue';
+
 	upLoad(event: DragEvent) {
 		this.draggedOver = false;
 		this.file = event.dataTransfer?.files.item(0) ?? null;
@@ -32,6 +37,11 @@ export class UpLoadComponent {
 	};
 
 	submit() {
+		this.pending = true;
+		this.showBanner = true;
+		this.bannerMessage = 'UpLoad in Progress';
+		this.bannerColour = 'blue';
+
 		const fileName = `${this.file!.name}-${UUID()}`;
 
 		this.storage.upload(`sights/${fileName}`, this.file);
