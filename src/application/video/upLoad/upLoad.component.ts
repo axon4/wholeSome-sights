@@ -50,6 +50,7 @@ export class UpLoadComponent {
 	};
 
 	submit() {
+		this.form.disable();
 		this.pending = true;
 		this.showBanner = true;
 		this.bannerMessage = 'UpLoad in Progress';
@@ -84,6 +85,7 @@ export class UpLoadComponent {
 					this.showProgress = false;
 				},
 				error: error => {
+					this.form.enable();
 					this.pending = false;
 					this.bannerMessage = 'Error UpLoading';
 					this.bannerColour = 'red';
