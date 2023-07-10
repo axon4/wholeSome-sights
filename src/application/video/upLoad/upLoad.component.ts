@@ -39,9 +39,9 @@ export class UpLoadComponent {
 	bannerMessage = 'UpLoad in Progress';
 	bannerColour = 'blue';
 
-	upLoad(event: DragEvent) {
+	upLoad(event: Event | DragEvent) {
 		this.draggedOver = false;
-		this.file = event.dataTransfer?.files.item(0) ?? null;
+		this.file = (event as DragEvent).dataTransfer?.files.item(0) ?? (event.target as HTMLInputElement).files?.item(0) ?? null;
 
 		if (!(this.file) || this.file.type !== 'video/mp4') return;
 
