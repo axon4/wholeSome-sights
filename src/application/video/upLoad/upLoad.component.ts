@@ -14,6 +14,7 @@ export class UpLoadComponent {
 	draggedOver = false;
 	file: File | null = null;
 	nextStep = false;
+	progress = 0;
 
 	title = new FormControl('', {
 		validators: [Validators.required, Validators.minLength(3)],
@@ -43,7 +44,10 @@ export class UpLoadComponent {
 		this.bannerColour = 'blue';
 
 		const fileName = `${this.file!.name}-${UUID()}`;
+		const task = this.storage.upload(`sights/${fileName}`, this.file);
 
-		this.storage.upload(`sights/${fileName}`, this.file);
+		task.percentageChanges().subscribe(percentage => {
+			this.progress = (percentage as number) / 100;
+		});
 	};
 };
