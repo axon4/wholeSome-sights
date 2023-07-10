@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { last } from 'rxjs';
+import { User } from '@firebase/auth-types';
+import { last, switchMap } from 'rxjs';
 import { v4 as UUID } from 'uuid';
 
 @Component({
@@ -10,8 +12,11 @@ import { v4 as UUID } from 'uuid';
 	styleUrls: ['./upLoad.component.css']
 })
 export class UpLoadComponent {
-	constructor(private storage: AngularFireStorage) {};
+	constructor(private authentication: AngularFireAuth, private storage: AngularFireStorage) {
+		authentication.user.subscribe(user => {this.user = user});
+	};
 
+	user: User | null = null;
 	draggedOver = false;
 	file: File | null = null;
 	nextStep = false;
@@ -46,19 +51,32 @@ export class UpLoadComponent {
 		this.bannerColour = 'blue';
 		this.showProgress = true;
 
-		const fileName = `${this.file!.name}-${UUID()}`;
-		const task = this.storage.upload(`sights/${fileName}`, this.file);
+		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
+		const task = this.storage.upload(`sights/${name}`, this.file);
 
 		task.percentageChanges().subscribe(percentage => {
 			this.progress = (percentage as number) / 100;
 		});
+
+		const sightReference = this.storage.ref(`sights/${name}`);
+
 		task.snapshotChanges()
-			.pipe(last())
+			.pipe(last(), switchMap(() => sightReference.getDownloadURL()))
 			.subscribe({
-				next: value => {
+				next: URL => {
+					const sight = {
+						uID: this.user?.uid,
+						displayName: this.user?.displayName,
+						title: this.title.value,
+						name,
+						URL
+					};
+
 					this.bannerMessage = 'UpLoad Successful';
 					this.bannerColour = 'green';
 					this.showProgress = false;
+
+					console.log(sight);
 				},
 				error: error => {
 					this.pending = false;
