@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@firebase/auth-types';
 import { last, switchMap } from 'rxjs';
 import { v4 as UUID } from 'uuid';
+import { SightService } from 'src/application/sight/sight.service';
 
 @Component({
 	selector: 'WS-upLoad',
@@ -12,7 +13,11 @@ import { v4 as UUID } from 'uuid';
 	styleUrls: ['./upLoad.component.css']
 })
 export class UpLoadComponent {
-	constructor(private authentication: AngularFireAuth, private storage: AngularFireStorage) {
+	constructor(
+		private authentication: AngularFireAuth,
+		private storage: AngularFireStorage,
+		private sight: SightService
+	) {
 		authentication.user.subscribe(user => {this.user = user});
 	};
 
@@ -65,18 +70,18 @@ export class UpLoadComponent {
 			.subscribe({
 				next: URL => {
 					const sight = {
-						uID: this.user?.uid,
-						displayName: this.user?.displayName,
+						uID: this.user!.uid,
+						displayName: this.user?.displayName as string,
 						title: this.title.value,
 						name,
 						URL
 					};
 
+					this.sight.addSight(sight);
+
 					this.bannerMessage = 'UpLoad Successful';
 					this.bannerColour = 'green';
 					this.showProgress = false;
-
-					console.log(sight);
 				},
 				error: error => {
 					this.pending = false;
