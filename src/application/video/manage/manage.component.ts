@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SightService } from 'src/application/sight/sight.service';
 import Sight from 'src/application/models/sight.model';
+import { ModalService } from 'src/application/modal/modal.service';
 
 @Component({
 	selector: 'WS-manage',
@@ -9,7 +10,12 @@ import Sight from 'src/application/models/sight.model';
 	styleUrls: ['./manage.component.css']
 })
 export class ManageComponent implements OnInit {
-	constructor(private router: Router, private route: ActivatedRoute, private sight: SightService) {};
+	constructor(
+		private router: Router,
+		private route: ActivatedRoute,
+		private sight: SightService,
+		private modal: ModalService
+	) {};
 
 	sights: Sight[] = [];
 	sortOrder: 'newest' | 'oldest' = 'newest';
@@ -37,5 +43,11 @@ export class ManageComponent implements OnInit {
 			relativeTo: this.route,
 			queryParams: {sort: value}
 		});
+	};
+
+	openModal(event: MouseEvent) {
+		event.preventDefault();
+
+		this.modal.toggleModal('edit');
 	};
 };
