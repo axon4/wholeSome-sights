@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import fireBase from 'firebase/compat/app';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@firebase/auth-types';
@@ -78,6 +79,7 @@ export class UpLoadComponent implements OnDestroy {
 						displayName: this.user?.displayName as string,
 						title: this.title.value,
 						name,
+						date: fireBase.firestore.FieldValue.serverTimestamp(),
 						URL
 					};
 
