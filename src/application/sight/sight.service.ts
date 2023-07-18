@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { of, switchMap } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/compat/firestore';
+import { map, of, switchMap } from 'rxjs';
 import Sight from 'src/application/models/sight.model';
 
 @Injectable({providedIn: 'root'})
@@ -26,7 +26,8 @@ export class SightService {
 
 					return snapShot;
 				};
-			})
+			}),
+			map(snapShot => (snapShot as QuerySnapshot<Sight>).docs)
 		);
 	};
 };
