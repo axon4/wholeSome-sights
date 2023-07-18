@@ -5,11 +5,13 @@ import { VideoRoutingModule } from './video-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ManageComponent } from './manage/manage.component';
 import { UpLoadComponent } from './upLoad/upLoad.component';
+import { EditModalComponent } from './edit-modal/edit-modal.component';
 
 @NgModule({
 	declarations: [
 		ManageComponent,
-		UpLoadComponent
+		UpLoadComponent,
+		EditModalComponent
 	],
 	imports: [
 		CommonModule,
