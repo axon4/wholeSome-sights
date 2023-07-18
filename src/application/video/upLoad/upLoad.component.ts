@@ -1,4 +1,5 @@
 import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -14,6 +15,7 @@ import { SightService } from 'src/application/sight/sight.service';
 })
 export class UpLoadComponent implements OnDestroy {
 	constructor(
+		private router: Router,
 		private authentication: AngularFireAuth,
 		private storage: AngularFireStorage,
 		private sight: SightService
@@ -70,7 +72,7 @@ export class UpLoadComponent implements OnDestroy {
 		this.task.snapshotChanges()
 			.pipe(last(), switchMap(() => sightReference.getDownloadURL()))
 			.subscribe({
-				next: URL => {
+				next: async URL => {
 					const sight = {
 						uID: this.user!.uid,
 						displayName: this.user?.displayName as string,
@@ -79,11 +81,15 @@ export class UpLoadComponent implements OnDestroy {
 						URL
 					};
 
-					this.sight.addSight(sight);
+					const sightReference = await this.sight.addSight(sight);
 
 					this.bannerMessage = 'UpLoad Successful';
 					this.bannerColour = 'green';
 					this.showProgress = false;
+
+					setTimeout(() => {
+						this.router.navigate(['sight', sightReference.id]);
+					}, 1000);
 				},
 				error: error => {
 					this.form.enable();

@@ -10,7 +10,7 @@ export class SightService {
 
 	sightsCollection: AngularFirestoreCollection<Sight>;
 
-	async addSight(sight: Sight) {
-		await this.sightsCollection.add(sight);
+	addSight(sight: Sight) {
+		return this.sightsCollection.add(sight);
 	};
 };
