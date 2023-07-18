@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SightService } from 'src/application/sight/sight.service';
-import Sight from 'src/application/models/sight.model';
 import { ModalService } from 'src/application/modal/modal.service';
+import Sight from 'src/application/models/sight.model';
 
 @Component({
 	selector: 'WS-manage',
@@ -18,6 +18,7 @@ export class ManageComponent implements OnInit {
 	) {};
 
 	sights: Sight[] = [];
+	currentSight: Sight | null = null;
 	sortOrder: 'newest' | 'oldest' = 'newest';
 
 	ngOnInit() {
@@ -45,9 +46,10 @@ export class ManageComponent implements OnInit {
 		});
 	};
 
-	openModal(event: MouseEvent) {
+	openModal(event: MouseEvent, sight: Sight) {
 		event.preventDefault();
 
+		this.currentSight = sight;
 		this.modal.toggleModal('edit');
 	};
 };
