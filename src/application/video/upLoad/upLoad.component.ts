@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@firebase/auth-types';
 import { last, switchMap } from 'rxjs';
@@ -12,7 +12,7 @@ import { SightService } from 'src/application/sight/sight.service';
 	templateUrl: './upLoad.component.html',
 	styleUrls: ['./upLoad.component.css']
 })
-export class UpLoadComponent {
+export class UpLoadComponent implements OnDestroy {
 	constructor(
 		private authentication: AngularFireAuth,
 		private storage: AngularFireStorage,
@@ -23,6 +23,7 @@ export class UpLoadComponent {
 
 	user: User | null = null;
 	draggedOver = false;
+	task?: AngularFireUploadTask;
 	file: File | null = null;
 	nextStep = false;
 	progress = 0;
@@ -58,15 +59,15 @@ export class UpLoadComponent {
 		this.showProgress = true;
 
 		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
-		const task = this.storage.upload(`sights/${name}`, this.file);
+		this.task = this.storage.upload(`sights/${name}`, this.file);
 
-		task.percentageChanges().subscribe(percentage => {
+		this.task.percentageChanges().subscribe(percentage => {
 			this.progress = (percentage as number) / 100;
 		});
 
 		const sightReference = this.storage.ref(`sights/${name}`);
 
-		task.snapshotChanges()
+		this.task.snapshotChanges()
 			.pipe(last(), switchMap(() => sightReference.getDownloadURL()))
 			.subscribe({
 				next: URL => {
@@ -92,5 +93,9 @@ export class UpLoadComponent {
 					this.showProgress = false;
 				}
 			});
+	};
+
+	ngOnDestroy() {
+		this.task?.cancel();
 	};
 };
