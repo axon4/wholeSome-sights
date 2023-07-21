@@ -30,4 +30,8 @@ export class SightService {
 			map(snapShot => (snapShot as QuerySnapshot<Sight>).docs)
 		);
 	};
+
+	updateSight(ID: string, title: string) {
+		return this.sightsCollection.doc(ID).update({ title });
+	};
 };

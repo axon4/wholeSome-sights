@@ -52,4 +52,12 @@ export class ManageComponent implements OnInit {
 		this.currentSight = sight;
 		this.modal.toggleModal('edit');
 	};
+
+	update(event: Sight) {
+		this.sights.forEach((sight, index) => {
+			if (sight.documentID === event.documentID) {
+				this.sights[index].title = event.title;
+			};
+		});
+	};
 };
