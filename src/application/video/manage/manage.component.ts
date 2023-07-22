@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { SightService } from 'src/application/sight/sight.service';
 import { ModalService } from 'src/application/modal/modal.service';
 import Sight from 'src/application/models/sight.model';
@@ -20,12 +21,14 @@ export class ManageComponent implements OnInit {
 	sights: Sight[] = [];
 	currentSight: Sight | null = null;
 	sortOrder: 'newest' | 'oldest' = 'newest';
+	sort$ = new BehaviorSubject(this.sortOrder);
 
 	ngOnInit() {
 		this.route.queryParams.subscribe(queryParameters => {
 			this.sortOrder = queryParameters.sort === 'oldest' ? queryParameters.sort : 'newest';
+			this.sort$.next(this.sortOrder);
 		});
-		this.sight.getSights().subscribe(documents => {
+		this.sight.getSights(this.sort$).subscribe(documents => {
 			this.sights = [];
 			
 			documents.forEach(document => {

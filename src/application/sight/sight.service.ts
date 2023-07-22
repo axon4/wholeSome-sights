@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, of, switchMap } from 'rxjs';
 import Sight from 'src/application/models/sight.model';
 
 @Injectable({providedIn: 'root'})
@@ -17,13 +17,16 @@ export class SightService {
 		return this.sightsCollection.add(sight);
 	};
 
-	getSights() {
-		return this.authentication.user.pipe(
-			switchMap(user => {
+	getSights(sort$: BehaviorSubject<'newest' | 'oldest'>) {
+		return combineLatest([this.authentication.user, sort$]).pipe(
+			switchMap(([ user, sort ]) => {
 				if (!user) {
 					return of([]);
 				} else {
-					const snapShot = this.sightsCollection.ref.where('uID', '==', user.uid).get();
+					const snapShot = this.sightsCollection.ref
+						.where('uID', '==', user.uid)
+						.orderBy('date', sort === 'oldest' ? 'asc' : 'desc')
+						.get();
 
 					return snapShot;
 				};
