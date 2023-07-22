@@ -54,10 +54,10 @@ export class ManageComponent implements OnInit {
 	};
 
 	update(event: Sight) {
-		this.sights.forEach((sight, index) => {
-			if (sight.documentID === event.documentID) {
-				this.sights[index].title = event.title;
-			};
-		});
+		const updatedSight = this.sights.find(sight => sight.documentID === event.documentID);
+
+		if (updatedSight) {
+			updatedSight.title = event.title;
+		};
 	};
 };
