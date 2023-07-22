@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import fireBase from 'firebase/compat/app';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@firebase/auth-types';
