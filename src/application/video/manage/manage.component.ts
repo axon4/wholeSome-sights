@@ -60,4 +60,16 @@ export class ManageComponent implements OnInit {
 			updatedSight.title = event.title;
 		};
 	};
+
+	delete(event: MouseEvent, sight: Sight) {
+		event.preventDefault();
+
+		this.sight.deleteSight(sight);
+
+		const deletedSightIndex = this.sights.findIndex(({ documentID }) => documentID === sight.documentID);
+
+		if (deletedSightIndex !== -1) {
+			this.sights.splice(deletedSightIndex, 1);
+		};
+	};
 };
