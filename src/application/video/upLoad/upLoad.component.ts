@@ -8,6 +8,7 @@ import { User } from '@firebase/auth-types';
 import { last, switchMap } from 'rxjs';
 import { v4 as UUID } from 'uuid';
 import { SightService } from 'src/application/sight/sight.service';
+import { ScreenShotService } from 'src/application/screenShot/screenShot.service';
 
 @Component({
 	selector: 'WS-upLoad',
@@ -19,9 +20,11 @@ export class UpLoadComponent implements OnDestroy {
 		private router: Router,
 		private authentication: AngularFireAuth,
 		private storage: AngularFireStorage,
-		private sight: SightService
+		private sight: SightService,
+		public screenShot: ScreenShotService
 	) {
 		authentication.user.subscribe(user => {this.user = user});
+		screenShot.initialise();
 	};
 
 	user: User | null = null;
