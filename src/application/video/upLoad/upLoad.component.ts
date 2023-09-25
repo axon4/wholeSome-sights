@@ -46,11 +46,13 @@ export class UpLoadComponent implements OnDestroy {
 	bannerMessage = 'UpLoad in Progress';
 	bannerColour = 'blue';
 
-	upLoad(event: Event | DragEvent) {
+	async upLoad(event: Event | DragEvent) {
 		this.draggedOver = false;
 		this.file = (event as DragEvent).dataTransfer?.files.item(0) ?? (event.target as HTMLInputElement).files?.item(0) ?? null;
 
 		if (!(this.file) || this.file.type !== 'video/mp4') return;
+
+		await this.screenShot.getScreenShots(this.file);
 
 		this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
 		this.nextStep = true;
