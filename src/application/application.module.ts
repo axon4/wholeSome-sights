@@ -11,6 +11,7 @@ import { VideoModule } from './video/video.module';
 import { ApplicationComponent } from './application.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { ListComponent } from './list/list.component';
 import { SightComponent } from './sight/sight.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -21,6 +22,7 @@ const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 		ApplicationComponent,
 		HeaderComponent,
 		HomeComponent,
+		ListComponent,
 		SightComponent,
 		NotFoundComponent
 	],
