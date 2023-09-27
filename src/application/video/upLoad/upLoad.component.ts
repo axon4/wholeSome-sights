@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@firebase/auth-types';
-import { last, switchMap } from 'rxjs';
+import { combineLatest, last, switchMap } from 'rxjs';
 import { v4 as UUID } from 'uuid';
 import { SightService } from 'src/application/sight/sight.service';
 import { ScreenShotService } from 'src/application/screenShot/screenShot.service';
@@ -74,13 +74,18 @@ export class UpLoadComponent implements OnDestroy {
 		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
 
 		this.videoTask = this.storage.upload(`sights/${name}`, this.file);
-		this.videoTask.percentageChanges().subscribe(percentage => {
-			this.progress = (percentage as number) / 100;
-		});
 
 		const screenShotBlob = await this.screenShot.getBlobFromURL(this.selectedScreenShotURL);
 		
 		this.screenShotTask = this.storage.upload(`screenShots/${name}`, screenShotBlob);
+
+		combineLatest([this.videoTask.percentageChanges(), this.screenShotTask.percentageChanges()]).subscribe(([ videoPercentage, screenShotPercentage]) => {
+			if (!videoPercentage || !screenShotPercentage) return;
+
+			const totalPercentage = videoPercentage + screenShotPercentage;
+
+			this.progress = (totalPercentage as number) / 200;
+		});
 
 		const sightReference = this.storage.ref(`sights/${name}`);
 
