@@ -30,7 +30,12 @@
 				<form [formGroup]='form' (ngSubmit)='submit()'>
 					<h2 class='mb-4 text-xl'>Select ThumbNail</h2>
 					<div class='grid grid-cols-1 lg:grid-cols-3 gap-4'>
-						<div class='border-8 cursor-pointer border-green-400' *ngFor='let screenShotURL of screenShotURLs'>
+						<div
+							class='border-8 cursor-pointer'
+							[ngClass]='screenShotURL === selectedScreenShotURL ? "border-green-400" : "border-transparent"'
+							(click)='selectedScreenShotURL = screenShotURL'
+							*ngFor='let screenShotURL of screenShotURLs'
+						>
 							<img [src]='screenShotURL | safeURL' />
 						</div>
 					</div>
