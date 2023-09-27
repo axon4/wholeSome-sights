@@ -29,13 +29,14 @@ export class UpLoadComponent implements OnDestroy {
 
 	user: User | null = null;
 	draggedOver = false;
-	task?: AngularFireUploadTask;
+	videoTask?: AngularFireUploadTask;
 	file: File | null = null;
 	nextStep = false;
 	progress = 0;
 	showProgress = false;
 	screenShotURLs: string[] = [];
 	selectedScreenShotURL = '';
+	screenShotTask?: AngularFireUploadTask;
 
 	title = new FormControl('', {
 		validators: [Validators.required, Validators.minLength(3)],
@@ -56,13 +57,13 @@ export class UpLoadComponent implements OnDestroy {
 
 		if (!(this.file) || this.file.type !== 'video/mp4') return;
 
-		this.screenShotURLs = await this.screenShot.getScreenShots(this.file);
+		this.screenShotURLs = await this.screenShot.getURLs(this.file);
 		this.selectedScreenShotURL = this.screenShotURLs[1];
 		this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
 		this.nextStep = true;
 	};
 
-	submit() {
+	async submit() {
 		this.form.disable();
 		this.pending = true;
 		this.showBanner = true;
@@ -71,15 +72,19 @@ export class UpLoadComponent implements OnDestroy {
 		this.showProgress = true;
 
 		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
-		this.task = this.storage.upload(`sights/${name}`, this.file);
 
-		this.task.percentageChanges().subscribe(percentage => {
+		this.videoTask = this.storage.upload(`sights/${name}`, this.file);
+		this.videoTask.percentageChanges().subscribe(percentage => {
 			this.progress = (percentage as number) / 100;
 		});
 
+		const screenShotBlob = await this.screenShot.getBlobFromURL(this.selectedScreenShotURL);
+		
+		this.screenShotTask = this.storage.upload(`screenShots/${name}`, screenShotBlob);
+
 		const sightReference = this.storage.ref(`sights/${name}`);
 
-		this.task.snapshotChanges()
+		this.videoTask.snapshotChanges()
 			.pipe(last(), switchMap(() => sightReference.getDownloadURL()))
 			.subscribe({
 				next: async URL => {
@@ -113,6 +118,6 @@ export class UpLoadComponent implements OnDestroy {
 	};
 
 	ngOnDestroy() {
-		this.task?.cancel();
+		this.videoTask?.cancel();
 	};
 };

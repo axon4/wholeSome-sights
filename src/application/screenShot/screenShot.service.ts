@@ -19,7 +19,7 @@ export class ScreenShotService {
 		};
 	};
 
-	async getScreenShots(file: File) {
+	async getURLs(file: File) {
 		this.pending = true;
 
 		const data = await fetchFile(file);
@@ -49,5 +49,12 @@ export class ScreenShotService {
 		this.pending = false;
 
 		return screenShotURLS;
+	};
+
+	async getBlobFromURL(URL: string) {
+		const response = await fetch(URL);
+		const blob = await response.blob();
+
+		return blob;
 	};
 };
