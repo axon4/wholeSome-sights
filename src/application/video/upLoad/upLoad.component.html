@@ -33,7 +33,7 @@
 						<div
 							class='border-8 cursor-pointer'
 							[ngClass]='screenShotURL === selectedScreenShotURL ? "border-green-400" : "border-transparent"'
-							(click)='selectedScreenShotURL = screenShotURL'
+							(click)='!pending && selectedScreenShotURL = screenShotURL'
 							*ngFor='let screenShotURL of screenShotURLs'
 						>
 							<img [src]='screenShotURL | safeURL' />
