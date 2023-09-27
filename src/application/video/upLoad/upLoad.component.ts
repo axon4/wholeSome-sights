@@ -71,13 +71,15 @@ export class UpLoadComponent implements OnDestroy {
 		this.bannerColour = 'blue';
 		this.showProgress = true;
 
-		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
-		const sightPath = `sights/${name}`;
+		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}`;
+		const sightName = name + '.mp4';
+		const screenShotName = name + '.png';
+		const sightPath = `sights/${sightName}`;
 
 		this.sightTask = this.storage.upload(sightPath, this.file);
 
 		const screenShotBlob = await this.screenShot.getBlobFromURL(this.selectedScreenShotURL);
-		const screenShotPath = `screenShots/${name}`;
+		const screenShotPath = `screenShots/${screenShotName}`;
 		
 		this.screenShotTask = this.storage.upload(screenShotPath, screenShotBlob);
 
@@ -103,9 +105,10 @@ export class UpLoadComponent implements OnDestroy {
 						uID: this.user!.uid,
 						displayName: this.user?.displayName as string,
 						title: this.title.value,
-						name,
+						name: sightName,
 						date: fireBase.firestore.FieldValue.serverTimestamp(),
 						URL: sightURL,
+						screenShotName,
 						screenShotURL
 					};
 

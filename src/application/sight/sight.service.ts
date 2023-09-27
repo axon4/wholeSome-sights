@@ -41,8 +41,10 @@ export class SightService {
 
 	async deleteSight(sight: Sight) {
 		const sightReference = this.storage.ref(`sights/${sight.name}`);
+		const screenShotReference = this.storage.ref(`screenShots/${sight.screenShotName}`);
 
 		await sightReference.delete();
+		await screenShotReference.delete();
 
 		await this.sightsCollection.doc(sight.documentID).delete();
 	};

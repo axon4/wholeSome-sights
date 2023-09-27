@@ -8,5 +8,6 @@ export default interface Sight {
 	name: string;
 	date: fireBase.firestore.FieldValue;
 	URL: string;
+	screenShotName: string;
 	screenShotURL: string;
 };
