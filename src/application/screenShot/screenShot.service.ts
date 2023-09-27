@@ -9,6 +9,7 @@ export class ScreenShotService {
 	};
 
 	initialised = false;
+	pending = false;
 	private FFMPEG;
 
 	async initialise() {
@@ -19,6 +20,8 @@ export class ScreenShotService {
 	};
 
 	async getScreenShots(file: File) {
+		this.pending = true;
+
 		const data = await fetchFile(file);
 
 		this.FFMPEG.FS('writeFile', file.name, data);
@@ -42,6 +45,8 @@ export class ScreenShotService {
 
 			return imageURL;
 		});
+
+		this.pending = false;
 
 		return screenShotURLS;
 	};

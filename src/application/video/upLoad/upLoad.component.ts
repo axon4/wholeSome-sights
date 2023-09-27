@@ -48,6 +48,8 @@ export class UpLoadComponent implements OnDestroy {
 	bannerColour = 'blue';
 
 	async upLoad(event: Event | DragEvent) {
+		if (this.screenShot.pending) return;
+
 		this.draggedOver = false;
 		this.file = (event as DragEvent).dataTransfer?.files.item(0) ?? (event.target as HTMLInputElement).files?.item(0) ?? null;
 
