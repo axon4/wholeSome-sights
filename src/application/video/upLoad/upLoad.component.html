@@ -30,7 +30,7 @@
 					<h2 class='mb-4 text-xl'>Select ThumbNail</h2>
 					<div class='grid grid-cols-1 lg:grid-cols-3 gap-4' *ngFor='let screenShotURL of screenShotURLs'>
 						<div class='border-8 cursor-pointer border-green-400'>
-							<img [src]='screenShotURL' />
+							<img [src]='screenShotURL | safeURL' />
 						</div>
 					</div>
 					<div class='mt-4'>
