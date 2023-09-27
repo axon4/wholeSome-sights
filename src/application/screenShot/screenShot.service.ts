@@ -31,12 +31,18 @@ export class ScreenShotService {
 		const convertSecondsToTime = (seconds: number) => new Date(seconds * 1000).toISOString().slice(11, 19);
 
 		const keyFrames = [Number(duration) / 4, Number(duration) / 2, (Number(duration) / 4) * 3].map(convertSecondsToTime);
-		const commands: string[] = [];
-
-		keyFrames.forEach((keyFrame, index) => {
-			commands.push('-i', file.name, '-ss', keyFrame, '-frames:v', '1', '-filter:v', 'scale=510:-1', `screenShot${index + 1}.png`);
-		});
+		const commands = keyFrames.flatMap((keyFrame, index) => ['-i', file.name, '-ss', keyFrame, '-frames:v', '1', '-filter:v', 'scale=510:-1', `screenShot${index + 1}.png`]);
 
 		await this.FFMPEG.run(...commands);
+
+		const screenShotURLS = keyFrames.map((_, index) => {
+			const binary = this.FFMPEG.FS('readFile', `screenShot${index + 1}.png`);
+			const blob = new Blob([binary.buffer], {type: 'image/png'});
+			const imageURL = URL.createObjectURL(blob);
+
+			return imageURL;
+		});
+
+		return screenShotURLS;
 	};
 };

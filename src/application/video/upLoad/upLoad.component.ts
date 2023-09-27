@@ -34,6 +34,7 @@ export class UpLoadComponent implements OnDestroy {
 	nextStep = false;
 	progress = 0;
 	showProgress = false;
+	screenShotURLs: string[] = [];
 
 	title = new FormControl('', {
 		validators: [Validators.required, Validators.minLength(3)],
@@ -52,7 +53,7 @@ export class UpLoadComponent implements OnDestroy {
 
 		if (!(this.file) || this.file.type !== 'video/mp4') return;
 
-		await this.screenShot.getScreenShots(this.file);
+		this.screenShotURLs = await this.screenShot.getScreenShots(this.file);
 
 		this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
 		this.nextStep = true;
