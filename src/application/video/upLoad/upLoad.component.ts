@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '@firebase/auth-types';
-import { combineLatest, last, switchMap } from 'rxjs';
+import { combineLatest, forkJoin, /* last, */ switchMap } from 'rxjs';
 import { v4 as UUID } from 'uuid';
 import { SightService } from 'src/application/sight/sight.service';
 import { ScreenShotService } from 'src/application/screenShot/screenShot.service';
@@ -72,12 +72,14 @@ export class UpLoadComponent implements OnDestroy {
 		this.showProgress = true;
 
 		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
+		const sightPath = `sights/${name}`;
 
-		this.sightTask = this.storage.upload(`sights/${name}`, this.file);
+		this.sightTask = this.storage.upload(sightPath, this.file);
 
 		const screenShotBlob = await this.screenShot.getBlobFromURL(this.selectedScreenShotURL);
+		const screenShotPath = `screenShots/${name}`;
 		
-		this.screenShotTask = this.storage.upload(`screenShots/${name}`, screenShotBlob);
+		this.screenShotTask = this.storage.upload(screenShotPath, screenShotBlob);
 
 		combineLatest([this.sightTask.percentageChanges(), this.screenShotTask.percentageChanges()]).subscribe(([ sightPercentage, screenShotPercentage]) => {
 			if (!sightPercentage || !screenShotPercentage) return;
@@ -87,19 +89,24 @@ export class UpLoadComponent implements OnDestroy {
 			this.progress = (totalPercentage as number) / 200;
 		});
 
-		const sightReference = this.storage.ref(`sights/${name}`);
+		const sightReference = this.storage.ref(sightPath);
+		const screenShotReference = this.storage.ref(screenShotPath);
 
-		this.sightTask.snapshotChanges()
-			.pipe(last(), switchMap(() => sightReference.getDownloadURL()))
+		forkJoin([this.sightTask.snapshotChanges(), this.screenShotTask.snapshotChanges()])
+			.pipe(
+				// last(),
+				switchMap(() => forkJoin([sightReference.getDownloadURL(), screenShotReference.getDownloadURL()]))
+			)
 			.subscribe({
-				next: async URL => {
+				next: async ([ sightURL, screenShotURL ]) => {
 					const sight = {
 						uID: this.user!.uid,
 						displayName: this.user?.displayName as string,
 						title: this.title.value,
 						name,
 						date: fireBase.firestore.FieldValue.serverTimestamp(),
-						URL
+						URL: sightURL,
+						screenShotURL
 					};
 
 					const sightReference = await this.sight.addSight(sight);
