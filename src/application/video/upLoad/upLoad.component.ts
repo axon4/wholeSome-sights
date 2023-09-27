@@ -29,7 +29,7 @@ export class UpLoadComponent implements OnDestroy {
 
 	user: User | null = null;
 	draggedOver = false;
-	videoTask?: AngularFireUploadTask;
+	sightTask?: AngularFireUploadTask;
 	file: File | null = null;
 	nextStep = false;
 	progress = 0;
@@ -73,23 +73,23 @@ export class UpLoadComponent implements OnDestroy {
 
 		const name = `${this.file!.name.replace(/\.[^/.]+$/, '')}-${UUID()}.mp4`;
 
-		this.videoTask = this.storage.upload(`sights/${name}`, this.file);
+		this.sightTask = this.storage.upload(`sights/${name}`, this.file);
 
 		const screenShotBlob = await this.screenShot.getBlobFromURL(this.selectedScreenShotURL);
 		
 		this.screenShotTask = this.storage.upload(`screenShots/${name}`, screenShotBlob);
 
-		combineLatest([this.videoTask.percentageChanges(), this.screenShotTask.percentageChanges()]).subscribe(([ videoPercentage, screenShotPercentage]) => {
-			if (!videoPercentage || !screenShotPercentage) return;
+		combineLatest([this.sightTask.percentageChanges(), this.screenShotTask.percentageChanges()]).subscribe(([ sightPercentage, screenShotPercentage]) => {
+			if (!sightPercentage || !screenShotPercentage) return;
 
-			const totalPercentage = videoPercentage + screenShotPercentage;
+			const totalPercentage = sightPercentage + screenShotPercentage;
 
 			this.progress = (totalPercentage as number) / 200;
 		});
 
 		const sightReference = this.storage.ref(`sights/${name}`);
 
-		this.videoTask.snapshotChanges()
+		this.sightTask.snapshotChanges()
 			.pipe(last(), switchMap(() => sightReference.getDownloadURL()))
 			.subscribe({
 				next: async URL => {
@@ -123,6 +123,6 @@ export class UpLoadComponent implements OnDestroy {
 	};
 
 	ngOnDestroy() {
-		this.videoTask?.cancel();
+		this.sightTask?.cancel();
 	};
 };
