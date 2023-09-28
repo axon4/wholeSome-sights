@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SightService } from '../sight/sight.service';
 
 @Component({
 	selector: 'WS-list',
@@ -6,6 +7,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 	styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit, OnDestroy {
+	constructor(public sight: SightService) {
+		sight.getSightsList();
+	};
+
 	ngOnInit() {
 		window.addEventListener('scroll', this.handleScroll);
 	};
@@ -17,7 +22,7 @@ export class ListComponent implements OnInit, OnDestroy {
 		const scrolledToBottomOfWindow = Math.round(scrollTop) + innerHeight === offsetHeight;
 
 		if (scrolledToBottomOfWindow) {
-			console.log('bottom');
+			this.sight.getSightsList();
 		};
 	};
 

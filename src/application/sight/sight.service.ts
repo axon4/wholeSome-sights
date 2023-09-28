@@ -12,6 +12,8 @@ export class SightService {
 	};
 
 	sightsCollection: AngularFirestoreCollection<Sight>;
+	sightsList: Sight[] = [];
+	pending = false;
 
 	addSight(sight: Sight) {
 		return this.sightsCollection.add(sight);
@@ -33,6 +35,30 @@ export class SightService {
 			}),
 			map(snapShot => (snapShot as QuerySnapshot<Sight>).docs)
 		);
+	};
+
+	async getSightsList() {
+		if (this.pending) return;
+
+		this.pending = true;
+
+		let query = this.sightsCollection.ref.orderBy('date', 'desc').limit(6);
+		const { length } = this.sightsList;
+
+		if (length) {
+			const lastDocumentID = this.sightsList[length - 1].documentID;
+			const lastDocument = await this.sightsCollection.doc(lastDocumentID).get().toPromise();
+
+			query = query.startAfter(lastDocument);
+		};
+
+		const snapShots = await query.get();
+
+		snapShots.forEach(document => {
+			this.sightsList.push({documentID: document.id, ...document.data()})
+		});
+
+		this.pending = false;
 	};
 
 	updateSight(ID: string, title: string) {
