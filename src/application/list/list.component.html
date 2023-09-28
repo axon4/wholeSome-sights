@@ -4,7 +4,7 @@
 		*ngFor='let sight of sight.sightsList'
 		[routerLink]='["/", "sight", sight.documentID]'
 	>
-		<img [src]='sight.screenShotURL' class='card-img-top rounded-tl-2xl w-full' />
+		<img [src]='sight.screenShotURL' class='card-img-top rounded-tl-2xl w-full' crossorigin />
 		<div class='relative'>
 			<div class='absolute pointer-events-none bottom-full w-full background-secondary text-white'>
 				<div class='absolute bottom-full w-full pb-5 overflow-hidden'>
