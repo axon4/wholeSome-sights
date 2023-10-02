@@ -11,7 +11,7 @@
 	<div class='grid grid-cols-1 lg:grid-cols-3 gap-4'>
 		<div class='mt-6 rounded-tl-2xl rounded-br-2xl shadow-xl bg-secondary flex flex-col justify-start' *ngFor='let sight of sights'>
 			<a href='#'>
-				<img src='assets/img/1.jpg' class='card-img-top rounded-tl-2xl w-full' />
+				<img [src]='sight.screenShotURL' class='card-img-top rounded-tl-2xl w-full' crossorigin />
 			</a>
 			<div class='p-6 text-2xl'>
 				<a href='#' class='font-bold mb-2'>{{ sight.title }}</a>
