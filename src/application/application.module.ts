@@ -7,7 +7,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
 import { ApplicationRoutingModule } from './application-routing.module';
 import { UserModule } from './user/user.module';
-import { VideoModule } from './video/video.module';
+// import { VideoModule } from './video/video.module';
 import { ApplicationComponent } from './application.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -35,7 +35,7 @@ const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 		AngularFireAuthModule,
 		AngularFirestoreModule,
 		AngularFireStorageModule,
-		VideoModule,
+		// VideoModule,
 		ApplicationRoutingModule
 	],
 	providers: [],
