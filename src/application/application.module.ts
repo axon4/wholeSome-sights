@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { ListComponent } from './list/list.component';
 import { SightComponent } from './sight/sight.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TimeStampPipe } from './timeStamp/timeStamp.pipe';
 
 const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 
@@ -24,7 +25,8 @@ const FireBaseModule = AngularFireModule.initializeApp(environment.fireBase);
 		HomeComponent,
 		ListComponent,
 		SightComponent,
-		NotFoundComponent
+		NotFoundComponent,
+		TimeStampPipe
 	],
 	imports: [
 		BrowserModule,
