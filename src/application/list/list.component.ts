@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { SightService } from '../sight/sight.service';
 
@@ -13,8 +13,12 @@ export class ListComponent implements OnInit, OnDestroy {
 		sight.getSightsList();
 	};
 
+	@Input() scrollAble = true;
+
 	ngOnInit() {
-		window.addEventListener('scroll', this.handleScroll);
+		if (this.scrollAble) {
+			window.addEventListener('scroll', this.handleScroll);
+		};
 	};
 
 	handleScroll = () => {
@@ -29,6 +33,10 @@ export class ListComponent implements OnInit, OnDestroy {
 	};
 
 	ngOnDestroy() {
-		window.removeEventListener('scroll', this.handleScroll);
+		if (this.scrollAble) {
+			window.removeEventListener('scroll', this.handleScroll);
+		};
+
+		this.sight.sightsList = [];
 	};
 };
