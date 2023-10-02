@@ -64,6 +64,17 @@ export class ManageComponent implements OnInit {
 		};
 	};
 
+	async copyLink(event: MouseEvent, documentID: string | undefined) {
+		event.preventDefault();
+
+		if (!documentID) return;
+
+		const link = `${location.origin}/sight/${documentID}`;
+
+		await navigator.clipboard.writeText(link);
+		alert('Link Copied to ClipBoard');
+	};
+
 	delete(event: MouseEvent, sight: Sight) {
 		event.preventDefault();
 
