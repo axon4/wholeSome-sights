@@ -1,11 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import VideoJS from 'video.js';
 
 @Component({
 	selector: 'WS-sight',
 	templateUrl: './sight.component.html',
-	styleUrls: ['./sight.component.css']
+	styleUrls: ['./sight.component.css'],
+	encapsulation: ViewEncapsulation.None
 })
 export class SightComponent implements OnInit {
 	constructor(private route: ActivatedRoute) {
