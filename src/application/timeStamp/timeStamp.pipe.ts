@@ -6,7 +6,9 @@ import fireBase from 'firebase/compat/app';
 export class TimeStampPipe implements PipeTransform {
 	constructor(private date: DatePipe) {};
 
-	transform(value: fireBase.firestore.FieldValue) {
+	transform(value: fireBase.firestore.FieldValue | undefined) {
+		if (!value) return '';
+
 		const date = (value as fireBase.firestore.Timestamp).toDate();
 		const timeStamp = this.date.transform(date, 'dd/mm/yyyy hh:mm:ss zzzz');
 
