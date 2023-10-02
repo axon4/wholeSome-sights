@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -6,14 +7,38 @@ import { BehaviorSubject, combineLatest, map, of, switchMap } from 'rxjs';
 import Sight from 'src/application/models/sight.model';
 
 @Injectable({providedIn: 'root'})
-export class SightService {
-	constructor(private authentication: AngularFireAuth, private fireStore: AngularFirestore, private storage: AngularFireStorage) {
+export class SightService implements Resolve<Sight | null> {
+	constructor(
+		private router: Router,
+		private authentication: AngularFireAuth,
+		private fireStore: AngularFirestore,
+		private storage: AngularFireStorage
+	) {
 		this.sightsCollection = fireStore.collection<Sight>('sights');
 	};
 
 	sightsCollection: AngularFirestoreCollection<Sight>;
 	sightsList: Sight[] = [];
 	pending = false;
+
+	resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+		return this.sightsCollection
+			.doc(route.params.ID)
+			.get()
+			.pipe(
+				map(snapShot => {
+					const data = snapShot.data();
+
+					if (!data) {
+						this.router.navigate(['/']);
+
+						return null;
+					} else {
+						return data;
+					};
+				})
+			);
+	};
 
 	addSight(sight: Sight) {
 		return this.sightsCollection.add(sight);

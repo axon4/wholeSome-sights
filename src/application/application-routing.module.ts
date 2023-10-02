@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SightComponent } from './sight/sight.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { SightService } from './sight/sight.service';
 
 const routes: Routes = [
 	{
@@ -11,7 +12,10 @@ const routes: Routes = [
 	},
 	{
 		path: 'sight/:ID',
-		component: SightComponent
+		component: SightComponent,
+		resolve: {
+			sight: SightService
+		}
 	},
 	{
 		path: '**',
