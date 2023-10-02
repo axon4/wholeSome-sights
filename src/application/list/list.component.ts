@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { SightService } from '../sight/sight.service';
 
 @Component({
 	selector: 'WS-list',
 	templateUrl: './list.component.html',
-	styleUrls: ['./list.component.css']
+	styleUrls: ['./list.component.css'],
+	providers: [DatePipe]
 })
 export class ListComponent implements OnInit, OnDestroy {
 	constructor(public sight: SightService) {
