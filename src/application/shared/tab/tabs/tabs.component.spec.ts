@@ -1,20 +1,44 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
-// import { TabsComponent } from './tabs.component';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { TabsComponent } from './tabs.component';
+import { TabComponent } from '../tab/tab.component';
 
-// describe('TabsComponent', () => {
-// 	let component: TabsComponent;
-// 	let fixture: ComponentFixture<TabsComponent>;
+@Component({
+	template: `
+		<WS-tabs>
+			<WS-tab title='tab 1' />
+			<WS-tab title='tab 2' />
+		</WS-tabs>
+	`
+})
+class TestTabsComponent {};
 
-// 	beforeEach(() => {
-// 		TestBed.configureTestingModule({
-// 			declarations: [TabsComponent]
-// 		});
-// 		fixture = TestBed.createComponent(TabsComponent);
-// 		component = fixture.componentInstance;
-// 		fixture.detectChanges();
-// 	});
+describe('TabsComponent', () => {
+	let component: TestTabsComponent;
+	let fixture: ComponentFixture<TestTabsComponent>;
 
-// 	it('should create', () => {
-// 		expect(component).toBeTruthy();
-// 	});
-// });
+	beforeEach(() => {
+		TestBed.configureTestingModule({
+			declarations: [TestTabsComponent, TabsComponent, TabComponent]
+		});
+		fixture = TestBed.createComponent(TestTabsComponent);
+		component = fixture.componentInstance;
+		fixture.detectChanges();
+	});
+
+	it('create', () => {
+		expect(component).toBeTruthy();
+	});
+
+	it('render 2 tabs', () => {
+		const elements = fixture.debugElement.queryAll(By.css('li'));
+
+		expect(elements.length).withContext('did not render').toBe(2);
+
+		const component = fixture.debugElement.query(By.directive(TabsComponent));
+		const tabs = component.componentInstance.tabs;
+
+		expect(tabs.length).withContext('did not load').toBe(2);
+	});
+});
