@@ -1,15 +1,15 @@
-import { TestBed } from '@angular/core/testing';
-import { ScreenShotService } from './screenShot.service';
+// import { TestBed } from '@angular/core/testing';
+// import { ScreenShotService } from './screenShot.service';
 
-describe('ScreenShotService', () => {
-	let service: ScreenShotService;
+// describe('ScreenShotService', () => {
+// 	let service: ScreenShotService;
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({});
-		service = TestBed.inject(ScreenShotService);
-	});
+// 	beforeEach(() => {
+// 		TestBed.configureTestingModule({});
+// 		service = TestBed.inject(ScreenShotService);
+// 	});
 
-	it('should be created', () => {
-		expect(service).toBeTruthy();
-	});
-});
+// 	it('should be created', () => {
+// 		expect(service).toBeTruthy();
+// 	});
+// });

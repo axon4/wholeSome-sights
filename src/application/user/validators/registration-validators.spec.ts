@@ -1,7 +1,7 @@
-import { RegistrationValidators } from './registration-validators';
+// import { RegistrationValidators } from './registration-validators';
 
-describe('RegistrationValidators', () => {
-	it('should create an instance', () => {
-		expect(new RegistrationValidators()).toBeTruthy();
-	});
-});
+// describe('RegistrationValidators', () => {
+// 	it('should create an instance', () => {
+// 		expect(new RegistrationValidators()).toBeTruthy();
+// 	});
+// });

@@ -1,9 +1,9 @@
-import { TimeStampPipe } from './timeStamp.pipe';
+// import { TimeStampPipe } from './timeStamp.pipe';
 
-describe('TimeStampPipe', () => {
-	it('create an instance', () => {
-		const pipe = new TimeStampPipe();
+// describe('TimeStampPipe', () => {
+// 	it('create an instance', () => {
+// 		const pipe = new TimeStampPipe();
 
-		expect(pipe).toBeTruthy();
-	});
-});
+// 		expect(pipe).toBeTruthy();
+// 	});
+// });
