@@ -10,6 +10,8 @@ import { InPutComponent } from './inPut/inPut.component';
 import { BannerComponent } from './banner/banner.component';
 import { EventBlockerDirective } from './event-blocker/event-blocker.directive';
 
+const NGXMaskProvider = provideEnvironmentNgxMask();
+
 @NgModule({
 	declarations: [
 		ModalComponent,
@@ -32,6 +34,6 @@ import { EventBlockerDirective } from './event-blocker/event-blocker.directive';
 		BannerComponent,
 		EventBlockerDirective
 	],
-	providers: [provideEnvironmentNgxMask()]
+	providers: [NGXMaskProvider]
 })
 export class SharedModule {};

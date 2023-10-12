@@ -17,12 +17,12 @@ export class SightComponent implements OnInit {
 	sight?: Sight;
 	@ViewChild('player', {static: true}) target?: ElementRef;
 	player?: VideoJS.Player;
-	
+
 	ngOnInit() {
 		this.player = VideoJS(this.target?.nativeElement);
 		this.route.data.subscribe(data => {
 			this.sight = data.sight as Sight;
-			
+
 			this.player?.src({
 				src: this.sight.URL,
 				type: 'video/mp4'

@@ -5,6 +5,6 @@ export const environment = {
 		projectId: 'wholesome-sights',
 		authDomain: 'wholesome-sights.firebaseapp.com',
 		storageBucket: 'wholesome-sights.appspot.com',
-		messagingSenderId: '1083988004656',
+		messagingSenderId: '1083988004656'
 	}
 };

@@ -11,15 +11,15 @@ const routes: Routes = [
 		component: HomeComponent
 	},
 	{
+		path: '',
+		loadChildren: async () => (await import('./video/video.module')).VideoModule
+	},
+	{
 		path: 'sight/:ID',
 		component: SightComponent,
 		resolve: {
 			sight: SightService
 		}
-	},
-	{
-		path: '',
-		loadChildren: async () => (await import('./video/video.module')).VideoModule
 	},
 	{
 		path: '**',

@@ -11,12 +11,7 @@ import Sight from 'src/application/models/sight.model';
 	styleUrls: ['./manage.component.css']
 })
 export class ManageComponent implements OnInit {
-	constructor(
-		private router: Router,
-		private route: ActivatedRoute,
-		private sight: SightService,
-		private modal: ModalService
-	) {};
+	constructor(private router: Router, private route: ActivatedRoute, private sight: SightService, private modal: ModalService) {};
 
 	sights: Sight[] = [];
 	currentSight: Sight | null = null;
@@ -30,7 +25,7 @@ export class ManageComponent implements OnInit {
 		});
 		this.sight.getSights(this.sort$).subscribe(documents => {
 			this.sights = [];
-			
+
 			documents.forEach(document => {
 				this.sights.push({
 					documentID: document.id,
@@ -56,11 +51,11 @@ export class ManageComponent implements OnInit {
 		this.modal.toggleModal('edit');
 	};
 
-	update(event: Sight) {
-		const updatedSight = this.sights.find(sight => sight.documentID === event.documentID);
+	upDate(event: Sight) {
+		const upDatedSight = this.sights.find(sight => sight.documentID === event.documentID);
 
-		if (updatedSight) {
-			updatedSight.title = event.title;
+		if (upDatedSight) {
+			upDatedSight.title = event.title;
 		};
 	};
 

@@ -86,7 +86,7 @@ export class SightService implements Resolve<Sight | null> {
 		this.pending = false;
 	};
 
-	updateSight(ID: string, title: string) {
+	upDateSight(ID: string, title: string) {
 		return this.sightsCollection.doc(ID).update({ title });
 	};
 

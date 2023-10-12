@@ -10,7 +10,7 @@ export class ModalService {
 	private modals: Modal[] = [];
 
 	register(ID: string) {
-		this.modals.push({ ID, open: false });		
+		this.modals.push({ ID, open: false });
 	};
 
 	isModalOpen(ID: string) {

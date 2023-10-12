@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	background-color: #161d31;
+	background-color: #161D31;
 }
 
 .material-icons.text-base {
@@ -33,7 +33,7 @@ body {
 }
 
 .cube:nth-child(2n) {
-	border-color: #FFF;
+	border-color: #FFFFFF;
 }
 
 .cube:nth-child(2) {
@@ -71,11 +71,10 @@ body {
 	grid-template-rows: 20px 0;
 }
 
-.latest:after,
-.latest:before {
-	content: " ";
+.latest:after, .latest:before {
+	content: ' ';
 	display: block;
-	border-bottom: 3px solid #fff;
+	border-bottom: 3px solid #FFFFFF;
 }
 
 .ghost {
@@ -88,7 +87,7 @@ body {
 	width: 30px;
 	height: 30px;
 	border-radius: 5px;
-	background-color: #161d31;
+	background-color: #161D31;
 	position: absolute;
 	margin-top: 188px;
 	-webkit-transform: rotate(45deg);
@@ -112,7 +111,7 @@ body {
 	width: 30px;
 	height: 30px;
 	border-radius: 4px;
-	background-color: #161d31;
+	background-color: #161D31;
 	position: absolute;
 	margin-top: 188px;
 	-webkit-transform: rotate(45deg) translateX(4px) translateY(4px);

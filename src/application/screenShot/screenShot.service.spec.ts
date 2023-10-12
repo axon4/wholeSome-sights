@@ -9,7 +9,7 @@
 // 		service = TestBed.inject(ScreenShotService);
 // 	});
 
-// 	it('should be created', () => {
+// 	it('create', () => {
 // 		expect(service).toBeTruthy();
 // 	});
 // });

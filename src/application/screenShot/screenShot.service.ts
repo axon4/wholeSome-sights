@@ -38,7 +38,7 @@ export class ScreenShotService {
 
 		await this.FFMPEG.run(...commands);
 
-		const screenShotURLS = keyFrames.map((_, index) => {
+		const screenShotURLS = keyFrames.map((keyFrame, index) => {
 			const binary = this.FFMPEG.FS('readFile', `screenShot${index + 1}.png`);
 			const blob = new Blob([binary.buffer], {type: 'image/png'});
 			const imageURL = URL.createObjectURL(blob);

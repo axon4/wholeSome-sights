@@ -1,9 +1,8 @@
 // to learn more about this file, see: https://angular.io/config/tsconfig
-
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"outDir": "./out-tsc/app",
+		"outDir": "./out-tsc/application",
 		"types": ["node"]
 	},
 	"files": ["src/main.ts"],

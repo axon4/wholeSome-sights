@@ -18,18 +18,18 @@ export class RegistrationFormComponent {
 		eMail: new FormControl('', [Validators.required, Validators.email], this.registrationValidators.validate),
 		age: new FormControl<number | null>(null, [Validators.required, Validators.min(9), Validators.max(70)]),
 		passWord: new FormControl('', [Validators.required, /* Validators.pattern(/(.*){7,96}/) */ Validators.minLength(7), Validators.maxLength(96)]),
-		confirmPassWord: new FormControl('', [Validators.required])
-	}, [RegistrationValidator.match('passWord', 'confirmPassWord')]);
-	
+		conFirmPassWord: new FormControl('', [Validators.required])
+	}, [RegistrationValidator.match('passWord', 'conFirmPassWord')]);
+
 	pending = false;
 	showBanner = false;
-	bannerMessage = 'Registration in Progress';
+	bannerMessage = 'Registration in-Progress';
 	bannerColour = 'blue';
 
 	async submit() {
 		this.pending = true;
 		this.showBanner = true;
-		this.bannerMessage = 'Registration in Progress';
+		this.bannerMessage = 'Registration in-Progress';
 		this.bannerColour = 'blue';
 
 		try {

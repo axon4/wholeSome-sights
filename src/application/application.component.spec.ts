@@ -18,7 +18,7 @@
 // 	it('should have as title \'wholesome-sights\'', () => {
 // 		const fixture = TestBed.createComponent(ApplicationComponent);
 // 		const application = fixture.componentInstance;
-		
+
 // 		expect(application.title).toEqual('wholesome-sights');
 // 	});
 

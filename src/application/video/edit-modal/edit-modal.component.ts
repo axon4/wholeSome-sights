@@ -13,7 +13,7 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 	constructor(private modal: ModalService, private sight: SightService) {};
 
 	@Input() currentSight: Sight | null = null;
-	@Output() update = new EventEmitter();
+	@Output() upDate = new EventEmitter();
 
 	sightID = new FormControl('', {nonNullable: true});
 	title = new FormControl('', {
@@ -24,7 +24,7 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
 	pending = false;
 	showBanner = false;
-	bannerMessage = 'Update in Progress';
+	bannerMessage = 'UpDate in-Progress';
 	bannerColour = 'blue';
 
 	ngOnInit() {
@@ -46,20 +46,20 @@ export class EditModalComponent implements OnInit, OnChanges, OnDestroy {
 
 		this.pending = true;
 		this.showBanner = true;
-		this.bannerMessage = 'Update in Progress';
+		this.bannerMessage = 'UpDate in-Progress';
 		this.bannerColour = 'blue';
 
 		try {
-			await this.sight.updateSight(this.sightID.value, this.title.value);
+			await this.sight.upDateSight(this.sightID.value, this.title.value);
 
-			this.bannerMessage = 'Update Successful';
+			this.bannerMessage = 'UpDate Successful';
 			this.bannerColour = 'green';
 
 			this.currentSight.title = this.title.value;
-			this.update.emit(this.currentSight);
+			this.upDate.emit(this.currentSight);
 		} catch (error) {
 			this.pending = false;
-			this.bannerMessage = 'Error Updating';
+			this.bannerMessage = 'Error UpDating';
 			this.bannerColour = 'red';
 		};
 	};

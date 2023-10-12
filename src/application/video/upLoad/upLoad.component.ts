@@ -16,13 +16,7 @@ import { ScreenShotService } from 'src/application/screenShot/screenShot.service
 	styleUrls: ['./upLoad.component.css']
 })
 export class UpLoadComponent implements OnDestroy {
-	constructor(
-		private router: Router,
-		private authentication: AngularFireAuth,
-		private storage: AngularFireStorage,
-		private sight: SightService,
-		public screenShot: ScreenShotService
-	) {
+	constructor(private router: Router, private authentication: AngularFireAuth, private storage: AngularFireStorage, private sight: SightService, public screenShot: ScreenShotService) {
 		authentication.user.subscribe(user => {this.user = user});
 		screenShot.initialise();
 	};
@@ -46,7 +40,7 @@ export class UpLoadComponent implements OnDestroy {
 
 	pending = false;
 	showBanner = false;
-	bannerMessage = 'UpLoad in Progress';
+	bannerMessage = 'UpLoad in-Progress';
 	bannerColour = 'blue';
 
 	async upLoad(event: Event | DragEvent) {
@@ -67,7 +61,7 @@ export class UpLoadComponent implements OnDestroy {
 		this.form.disable();
 		this.pending = true;
 		this.showBanner = true;
-		this.bannerMessage = 'UpLoad in Progress';
+		this.bannerMessage = 'UpLoad in-Progress';
 		this.bannerColour = 'blue';
 		this.showProgress = true;
 
@@ -80,7 +74,7 @@ export class UpLoadComponent implements OnDestroy {
 
 		const screenShotBlob = await this.screenShot.getBlobFromURL(this.selectedScreenShotURL);
 		const screenShotPath = `screenShots/${screenShotName}`;
-		
+
 		this.screenShotTask = this.storage.upload(screenShotPath, screenShotBlob);
 
 		combineLatest([this.sightTask.percentageChanges(), this.screenShotTask.percentageChanges()]).subscribe(([ sightPercentage, screenShotPercentage]) => {
