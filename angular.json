@@ -103,8 +103,45 @@
 						"scripts": [],
 						"karmaConfig": "karma.conf.js"
 					}
+				},
+				"cypress-run": {
+					"builder": "@cypress/schematic:cypress",
+					"options": {
+						"devServerTarget": "wholesome-sights:serve"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "wholesome-sights:serve:production"
+						}
+					}
+				},
+				"cypress-open": {
+					"builder": "@cypress/schematic:cypress",
+					"options": {
+						"watch": true,
+						"headless": false
+					}
+				},
+				"e2e": {
+					"builder": "@cypress/schematic:cypress",
+					"options": {
+						"devServerTarget": "wholesome-sights:serve",
+						"watch": true,
+						"headless": false
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "wholesome-sights:serve:production"
+						}
+					}
 				}
 			}
 		}
+	},
+	"cli": {
+		"schematicCollections": [
+			"@cypress/schematic",
+			"@schematics/angular"
+		]
 	}
 }
